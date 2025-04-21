@@ -1,8 +1,8 @@
 import { useDispatch, useSelector } from 'react-redux'
 import { Produto as ProdutoType } from '../App'
 import Produto from '../components/Produto'
-import { favoritar } from '../features/favorito/favoritoSlice'
-import { RootState } from '../store'
+import { favoritar } from '../store/reducers/favorito'
+import { RootState } from '../store/index'
 
 import * as S from './styles'
 
