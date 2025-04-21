@@ -17,7 +17,6 @@ export type Produto = {
   preco: number
   imagem: string
 }
-
 function App() {
   const [produtos, setProdutos] = useState<Produto[]>([])
   const favoritos = useSelector((state: RootState) => state.favoritos.itens)
@@ -29,14 +28,11 @@ function App() {
   }, [])
 
   return (
-    <Provider store={store}>
+    <>
       <GlobalStyle />
       <div className="container">
         <Header favoritos={favoritos} />
         <Produtos produtos={produtos} favoritos={favoritos} />
       </div>
-    </Provider>
+    </>
   )
-}
-
-export default App
