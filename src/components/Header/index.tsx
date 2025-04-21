@@ -1,9 +1,10 @@
 import { useSelector } from 'react-redux'
 import * as S from './styles'
+import { Produto } from '../../App'
+
+import { RootReducer } from '../../store'
 import cesta from '../../assets/cesta.png'
 import { paraReal } from '../Produto'
-import { RootReducer } from '../../store'
-import { Produto } from '../../App'
 
 type Props = {
   favoritos: Produto[]
