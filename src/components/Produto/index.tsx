@@ -5,22 +5,15 @@ import * as S from './styles'
 import { adicionar } from '../../store/reducers/carrinho'
 import { favoritar } from '../../store/reducers/favorito'
 import { RootState } from '../../store'
-
 type Props = {
   produto: ProdutoType
 }
-
-export const paraReal = (valor: number) =>
-  new Intl.NumberFormat('pt-BR', {
-    style: 'currency',
-    currency: 'BRL'
-  }).format(valor)
 
 const ProdutoComponent = ({ produto }: Props) => {
   const dispatch = useDispatch()
 
   const estaNosFavoritos = useSelector((state: RootState) =>
-    state.favoritos.itens.some((item) => item.id === produto.id)
+    state.favoritos.itens.some((item: ProdutoType) => item.id === produto.id)
   )
 
   return (
@@ -45,5 +38,3 @@ const ProdutoComponent = ({ produto }: Props) => {
     </S.Produto>
   )
 }
-
-export default ProdutoComponent

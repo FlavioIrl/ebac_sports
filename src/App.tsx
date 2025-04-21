@@ -1,11 +1,7 @@
 import { Provider } from 'react-redux'
 import { store } from './store'
 
-import { useSelector } from 'react-redux'
-import { RootState } from './store'
-
 import { useEffect, useState } from 'react'
-
 import Header from './components/Header'
 import Produtos from './containers/Produtos'
 
@@ -19,7 +15,6 @@ export type Produto = {
 }
 function App() {
   const [produtos, setProdutos] = useState<Produto[]>([])
-  const favoritos = useSelector((state: RootState) => state.favoritos.itens)
 
   useEffect(() => {
     fetch('https://fake-api-tau.vercel.app/api/ebac_sports')
@@ -28,11 +23,14 @@ function App() {
   }, [])
 
   return (
-    <>
+    <Provider store={store}>
       <GlobalStyle />
       <div className="container">
-        <Header favoritos={favoritos} />
-        <Produtos produtos={produtos} favoritos={favoritos} />
+        <Header />
+        <Produtos produtos={produtos} />
       </div>
-    </>
+    </Provider>
   )
+}
+
+export default App

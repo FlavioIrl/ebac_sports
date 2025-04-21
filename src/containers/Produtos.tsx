@@ -7,7 +7,9 @@ import { RootState } from '../store/index'
 import * as S from './styles'
 
 type Props = {
-  produtos: ProdutoType[]
+  produto: ProdutoType
+  estaNosFavoritos: boolean
+  favoritar: () => void
 }
 
 const ProdutosComponent = ({ produtos }: Props) => {
