@@ -1,20 +1,23 @@
 import { Produto as ProdutoType } from '../App'
 import Produto from '../components/Produto'
+import { useGetProdutosApiQuery } from '../services/api'
 import * as S from './styles'
 
 type Props = {
-  produtos: ProdutoType[]
   favoritos: ProdutoType[]
   favoritar: (produto: ProdutoType) => void
 }
-const ProdutosComponent = ({ produtos, favoritos, favoritar }: Props) => {
+const ProdutosComponent = ({ favoritos, favoritar }: Props) => {
   const produtoEstaNosFavoritos = (produto: ProdutoType) => {
     return favoritos.some((fav) => fav.id === produto.id)
   }
 
+  const { data: produtosData, isLoading } = useGetProdutosApiQuery()
+  if (isLoading) return <h2>Carregando...</h2>
+
   return (
     <S.Produtos>
-      {produtos.map((produto) => (
+      {produtosData?.map((produto) => (
         <Produto
           key={produto.id}
           produto={produto}
