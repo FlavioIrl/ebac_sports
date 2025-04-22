@@ -7,7 +7,7 @@ type Props = {
   favoritos: ProdutoType[]
   favoritar: (produto: ProdutoType) => void
 }
-const ProdutosComponent = ({ favoritos, favoritar }: Props) => {
+const ProdutosComponent = ({ favoritos }: Props) => {
   const produtoEstaNosFavoritos = (produto: ProdutoType) => {
     return favoritos.some((fav) => fav.id === produto.id)
   }
@@ -22,7 +22,6 @@ const ProdutosComponent = ({ favoritos, favoritar }: Props) => {
           key={produto.id}
           produto={produto}
           estaNosFavoritos={produtoEstaNosFavoritos(produto)}
-          favoritar={favoritar}
         />
       ))}
     </S.Produtos>
