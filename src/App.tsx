@@ -1,4 +1,8 @@
-import { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { favoritar } from './store/reducers/favorito'
+import { RootState } from './store'
+
+import { useEffect, useState } from 'react'
 import Header from './components/Header'
 import Produtos from './containers/Produtos'
 
@@ -12,8 +16,9 @@ export type Produto = {
 }
 
 function App() {
-  //  const [produtos, setProdutos] = useState<Produto[]>([])
-  // // const [favoritos, setFavoritos] = useState<Produto[]>([])
+  const [produtos, setProdutos] = useState<Produto[]>([])
+  const dispatch = useDispatch()
+  const favoritos = useSelector((state: RootState) => state.favorito.itens)
 
   useEffect(() => {
     fetch('https://fake-api-tau.vercel.app/api/ebac_sports')
@@ -30,12 +35,20 @@ function App() {
   //   }
   // }
 
+  const favoritarProduto = (produto: Produto) => {
+    dispatch(favoritar(produto))
+  }
+
   return (
     <>
       <GlobalStyle />
       <div className="container">
-        <Header />
-        <Produtos />
+        <Header favoritos={favoritos} />
+        <Produtos
+          produtos={produtos}
+          favoritos={favoritos}
+          favoritar={favoritarProduto}
+        />
       </div>
     </>
   )
